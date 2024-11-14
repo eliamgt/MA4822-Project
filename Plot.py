@@ -31,7 +31,8 @@ def plot_actions(time, action_levels, labels=None):
         
         # Add grid lines and set x-axis label
         ax.grid(True)
-        plt.xlabel('Time')
+        ax.set_xlim(time[0], time[-1])
+        plt.xlabel('Time (hours)')
         
         # Save plot as PDF with the label name or a default filename
         if labels:
@@ -76,16 +77,20 @@ def plot_updated(time, updated_data, base_data, noise_data, labels=None):
             ax.set_title(labels[i])
             # Add comfort range for specific labels
             if labels[i] == 'Temperature':
-                ax.hlines([18, 22], 0, 24, colors='r', linestyles='dashed', label='Comfort Range')
+                ax.hlines([18, 22], time[0], time[-1], colors='r', linestyles='dashed', label='Comfort Range')
+                ax.set_ylabel('Temperature (°C)')
             elif labels[i] == 'Humidity':
-                ax.hlines([40, 60], 0, 24, colors='r', linestyles='dashed', label='Comfort Range')
+                ax.hlines([40, 60], time[0], time[-1], colors='r', linestyles='dashed', label='Comfort Range')
+                ax.set_ylabel('Humidity (%)')
             elif labels[i] == 'Moisture':
-                ax.hlines([20], 0, 24, colors='r', linestyles='dashed', label='Comfort Range')
+                ax.hlines([20], time[0], time[-1], colors='r', linestyles='dashed', label='Comfort Range')
+                ax.set_ylabel('Moisture (%)')
         
         # Add grid, legend, and set x-axis label
         ax.grid(True)
+        ax.set_xlim(time[0], time[-1])
         ax.legend()
-        plt.xlabel('Time')
+        plt.xlabel('Time (hours)')
         
         # Save plot as PDF with the label name or a default filename
         if labels:
